@@ -3,16 +3,28 @@ import { computePosition, flip, shift, offset, arrow } from "@floating-ui/dom";
 
 export default class extends Controller {
   static targets = ["trigger", "content", "arrow"];
-  static values = { placement: { type: String, default: "bottom-end" } };
+  static values = {
+    placement: { type: String, default: "bottom-end" },
+    dismissOutside: { type: Boolean, default: true },
+  };
 
   connect() {
     this.visible = false;
     this.hideOnOutsideClick = this.hideOnOutsideClick.bind(this);
     this.hideOnEscape = this.hideOnEscape.bind(this);
+    this.hideBeforeCache = this.hideBeforeCache.bind(this);
+    document.addEventListener("turbo:before-cache", this.hideBeforeCache);
   }
 
   disconnect() {
     this.removeListeners();
+    document.removeEventListener("turbo:before-cache", this.hideBeforeCache);
+  }
+
+  // Close the popover before Turbo snapshots the page, so the cached copy
+  // is always in its default (closed) state.
+  hideBeforeCache() {
+    if (this.visible) this.hide();
   }
 
   toggle() {
@@ -24,7 +36,9 @@ export default class extends Controller {
     this.contentTarget.classList.remove("hidden");
     this.triggerTarget.setAttribute("aria-expanded", "true");
     this.position();
-    document.addEventListener("click", this.hideOnOutsideClick);
+    if (this.dismissOutsideValue) {
+      document.addEventListener("click", this.hideOnOutsideClick);
+    }
     document.addEventListener("keydown", this.hideOnEscape);
   }
 
