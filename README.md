@@ -7,6 +7,8 @@ Things you may want to cover:
 
 * Ruby version
 
+* Tailwind CSS via [tailwindcss-rails](https://github.com/rails/tailwindcss-rails) (~> 4.6)
+
 * System dependencies
 
 * Configuration
