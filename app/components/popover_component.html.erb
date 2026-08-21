@@ -1,0 +1,16 @@
+<div data-controller="popover"
+     data-popover-placement-value="<%= placement %>"
+     class="relative inline-block">
+  <button type="button"
+          data-popover-target="trigger"
+          data-action="popover#toggle"
+          aria-expanded="false">
+    <%= button %>
+  </button>
+
+  <div data-popover-target="content"
+       class="hidden absolute left-0 top-0 z-50 w-64 rounded-lg border border-gray-200 bg-white p-4 text-sm shadow-lg">
+    <%= body %>
+    <div data-popover-target="arrow" class="absolute h-2 w-2 rotate-45 border-l border-t border-gray-200 bg-white"></div>
+  </div>
+</div>

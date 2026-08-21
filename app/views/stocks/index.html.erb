@@ -4,7 +4,18 @@
       <h1 class="text-4xl font-bold tracking-tight">Stocks</h1>
       <p class="text-gray-500 mt-2">Listagem de ações — terreno de testes do cache do Turbo</p>
     </div>
-    <%= render ClockComponent.new %>
+    <div class="flex items-center gap-4">
+      <%= render PopoverComponent.new do |popover| %>
+        <% popover.with_button do %>
+          <span class="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100">?</span>
+        <% end %>
+        <% popover.with_body do %>
+          <p class="font-semibold mb-1">Sobre esta página</p>
+          <p class="text-gray-500">Terreno de testes do cache do Turbo. O index tem um <code>sleep 1</code> no controller pra deixar a resposta lenta de propósito.</p>
+        <% end %>
+      <% end %>
+      <%= render ClockComponent.new %>
+    </div>
   </div>
 
   <div class="grid gap-4">
