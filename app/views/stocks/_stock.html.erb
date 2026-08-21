@@ -1,0 +1,24 @@
+<%= link_to stock_path(stock.ticker),
+      class: "flex items-center justify-between rounded-lg border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow" do %>
+  <div class="flex items-center gap-4">
+    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-sm font-bold text-gray-600">
+      <%= stock.ticker.first %>
+    </div>
+    <div>
+      <p class="font-semibold"><%= stock.ticker %></p>
+      <p class="text-sm text-gray-500"><%= stock.name %></p>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-8">
+    <div class="text-right">
+      <p class="font-mono font-semibold"><%= number_to_currency stock.price %></p>
+      <p class="text-sm font-mono <%= stock.change_percent.negative? ? "text-red-600" : "text-green-600" %>">
+        <%= stock.change_percent.negative? ? "▼" : "▲" %> <%= number_to_percentage stock.change_percent.abs, precision: 2 %>
+      </p>
+    </div>
+    <p class="hidden sm:block text-sm text-gray-400 font-mono">
+      Vol <%= number_to_human stock.volume %>
+    </p>
+  </div>
+<% end %>

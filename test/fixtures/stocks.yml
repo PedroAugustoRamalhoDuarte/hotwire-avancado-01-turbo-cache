@@ -1,0 +1,13 @@
+aapl:
+  ticker: AAPL
+  name: Apple Inc.
+  price: 232.15
+  change_percent: 1.24
+  volume: 52400000
+
+msft:
+  ticker: MSFT
+  name: Microsoft Corp.
+  price: 428.90
+  change_percent: -0.56
+  volume: 18900000

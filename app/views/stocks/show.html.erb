@@ -1,0 +1,29 @@
+<div class="w-full max-w-2xl mx-auto">
+  <%= link_to "← Voltar", stocks_path, class: "text-sm text-gray-500 hover:text-gray-800" %>
+
+  <div class="mt-6 rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+    <div class="flex items-start justify-between">
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight"><%= @stock.ticker %></h1>
+        <p class="text-gray-500 mt-1"><%= @stock.name %></p>
+      </div>
+      <div class="text-right">
+        <p class="text-3xl font-mono font-bold"><%= number_to_currency @stock.price %></p>
+        <p class="text-lg font-mono <%= @stock.change_percent.negative? ? "text-red-600" : "text-green-600" %>">
+          <%= @stock.change_percent.negative? ? "▼" : "▲" %> <%= number_to_percentage @stock.change_percent.abs, precision: 2 %>
+        </p>
+      </div>
+    </div>
+
+    <dl class="mt-8 grid grid-cols-2 gap-6 border-t border-gray-100 pt-6 text-sm">
+      <div>
+        <dt class="text-gray-500">Volume</dt>
+        <dd class="mt-1 font-mono text-base"><%= number_to_human @stock.volume %></dd>
+      </div>
+      <div>
+        <dt class="text-gray-500">Atualizado em</dt>
+        <dd class="mt-1 font-mono text-base"><%= l @stock.updated_at, format: :short %></dd>
+      </div>
+    </dl>
+  </div>
+</div>
